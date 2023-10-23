@@ -6,12 +6,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-              
-       
-        
-    }
-
-     stage('Unit test') {
+        stage('Unit test') {
             steps {
                 echo "unit testing is done here"
             }
@@ -23,7 +18,12 @@ pipeline {
                 sh 'sonar-scanner'
             }
         }
+        
+        
+
+        
+        
+    }
 
     
 }
-
