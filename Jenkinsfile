@@ -27,17 +27,17 @@ pipeline {
         
 
         
-        stage('Deploy') {
-            steps {
-                echo "Deployment"
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         echo "Deployment"
+        //     }
+        // }
     }
 
-    post{
-        always{
-            echo 'cleaning up workspace'
-            deleteDir()
-        }
-    }
+    // post{
+    //     always{
+    //         echo 'cleaning up workspace'
+    //         deleteDir()
+    //     }
+    // }
 }
