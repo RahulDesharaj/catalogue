@@ -6,34 +6,32 @@ pipeline {
                 sh 'npm install'
             }
         }
-        // stage('Unit test') {
-        //     steps {
-        //         echo "unit testing is done here"
-        //     }
-        // }
-        // //sonar-scanner command expect sonar-project.properties should be available
+        stage('Unit test') {
+            steps {
+                echo "unit testing is done here"
+            }
+        }
+        //sonar-scanner command expect sonar-project.properties should be available
         // stage('Sonar Scan') {
         //     steps {
         //         sh 'ls -ltr'
         //         sh 'sonar-scanner'
         //     }
         // }
-
         stage('Build') {
             steps {
                 sh 'ls -ltr'
                 sh 'zip -r catalogue.zip ./* --exclude=.git --exclude=.zip'
             }
         }
-
         stage('Publish Artifact') {
             steps {
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: '52.200.163.190/:8081/',
+                    nexusUrl: '52.200.163.190:8081/',
                     groupId: 'com.roboshop',
-                    version: '1.0.0',
+                    version: '1.0.1',
                     repository: 'catalogue',
                     credentialsId: 'nexus-auth',
                     artifacts: [
@@ -45,11 +43,13 @@ pipeline {
                 )
             }
         }
-        
-        
 
         
-        
+        stage('Deploy') {
+            steps {
+                echo "Deployment"
+            }
+        }
     }
 
     post{
@@ -58,6 +58,4 @@ pipeline {
             deleteDir()
         }
     }
-
-    
 }
